@@ -1,0 +1,393 @@
+@use 'scss-reset/reset';
+@import './font//BasisGrotesquePro/stylesheet.css';
+
+$screen-480-max: 480px;
+$screen-640-max: 640px;
+$screen-768-max: 768px;
+$screen-992-max: 992px;
+$screen-1024-max: 1024px;
+
+@mixin w480 {
+  @media (max-width: #{$screen-480-max}) {
+    @content;
+  }
+}
+
+@mixin w640 {
+  @media (max-width: #{$screen-640-max}) {
+    @content;
+  }
+}
+
+@mixin w768 {
+  @media (max-width: #{$screen-768-max}) {
+    @content;
+  }
+}
+
+@mixin w992 {
+  @media (max-width: #{$screen-992-max}) {
+    @content;
+  }
+}
+
+@mixin w1024 {
+  @media (max-width: #{$screen-1024-max}) {
+    @content;
+  }
+}
+
+@mixin h750 {
+  @media (max-height: 750px) {
+    @content;
+  }
+}
+
+@mixin textStyle($fontSize, $fontWeight, $lineHeight) {
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+}
+
+$color-text: #1a1919;
+$color-input: #060e1e;
+$color-link: #316fea;
+$color-border: #d3d8dc;
+$color-line: #e3e6e9;
+$color-placeholder: #a1abb5;
+
+body {
+  font: normal normal normal 14px/1.3em 'Basis Grotesque Pro', sans-serif;
+  max-width: 1200px;
+  padding: 0 70px;
+  margin: 0 auto;
+  @include w640 {
+    padding: 0 30px;
+  }
+}
+
+a {
+  color: $color-link;
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  padding: 20px 0;
+  gap: 60px;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo {
+    margin-bottom: 10px;
+  }
+  .gamburger {
+    display: none;
+    @include w992 {
+      width: 30px;
+      height: 18px;
+      display: block;
+      border-top: 2px solid $color-link;
+      border-bottom: 2px solid $color-link;
+      position: relative;
+      transition: all 0.3s;
+      &:after {
+        position: absolute;
+        content: ' ';
+        width: 100%;
+        height: 2px;
+        background-color: $color-link;
+        top: 6px;
+        left: 0;
+        display: block;
+      }
+      &.active {
+        transform: rotate(45deg) translate(2px, 8px);
+        border-bottom: none;
+        &:after {
+          @include w992 {
+            transform: rotate(90deg) translate(-8px, 1px);
+          }
+        }
+      }
+    }
+  }
+  .menu {
+    display: flex;
+    gap: 30px;
+    @include w992 {
+      display: none;
+      row-gap: 20px;
+      position: absolute;
+      flex-direction: column;
+      right: 70px;
+      background: #fff;
+      top: 62px;
+      box-shadow: -4px 4px 5px #ddd;
+      padding: 20px;
+      &.active {
+        display: flex;
+      }
+      @include w640 {
+        right: 30px;
+      }
+    }
+
+    .breakline {
+      margin-right: 40px;
+      @include w992 {
+        padding-bottom: 20px;
+        border-bottom: 1px solid $color-border;
+        display: block;
+        width: 100%;
+      }
+    }
+
+    a {
+      @include textStyle(15px, 400, 20px);
+    }
+  }
+}
+
+// skeleton
+.form {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-bottom: 30px;
+  max-width: 100%;
+  @include h750 {
+    top: 10%;
+    transform: translate(-50%, 0);
+  }
+  @include w480 {
+    padding: 0 30px 30px;
+  }
+}
+
+// button
+.button {
+  border-radius: 6px;
+  border: 1.2px solid $color-border;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include textStyle(14px, 500, 20px);
+  width: 192px;
+  height: 48px;
+  gap: 10px;
+  text-transform: capitalize;
+  @include w480 {
+    width: 142px;
+  }
+
+  .button__icon {
+    width: 18px;
+    height: 18px;
+    transform: translateY(-2px);
+
+    &.github__icon {
+      width: 19.06px;
+    }
+  }
+}
+.google {
+  .google__icon {
+    background: url(../image/google.svg) center center/contain no-repeat;
+  }
+}
+
+.github {
+  .github__icon {
+    background: url(../image/github.svg) center center/contain no-repeat;
+  }
+}
+
+//logo
+.logo {
+  margin-bottom: 50px;
+}
+
+// social-login
+.social-login {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+// header
+.h1 {
+  @include textStyle(30px, 700, 38.73px);
+  margin-bottom: 10px;
+}
+
+label {
+  position: relative;
+
+  span {
+    @include textStyle(15px, 500, 21px);
+    letter-spacing: -0.24%;
+    color: $color-input;
+    display: block;
+    margin-bottom: 7px;
+  }
+  .show-password {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    background: url(../image/view.svg) center center / 20px no-repeat;
+    bottom: 7px;
+    right: 16px;
+
+    &.active {
+      &:after {
+        position: absolute;
+        content: ' ';
+        width: 25px;
+        height: 1px;
+        transform: rotate(-45deg);
+        background: #69737d;
+        z-index: 5;
+        right: 4px;
+        top: 16px;
+      }
+    }
+  }
+}
+input.error {
+  border-color: tomato;
+}
+div.error {
+  color: tomato;
+  @include textStyle(14px, 400, 20px);
+  position: absolute;
+  right: 17px;
+  bottom: 37.5px;
+  background: #fff;
+}
+// or
+.or {
+  position: relative;
+  border-top: 1px solid $color-line;
+  width: 100%;
+
+  .or__text {
+    padding: 0 10px;
+    text-transform: uppercase;
+    color: #bec5cc;
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+  }
+}
+
+// action button
+.action__button {
+  width: 100%;
+  height: 48px;
+  text-align: center;
+  border-radius: 8px;
+  @include textStyle(16px, 500, 21px);
+  margin-top: 10px;
+
+  &.button_primary {
+    background-color: $color-link;
+    color: #fff;
+  }
+  &.button_secondary {
+    border: 1.2px solid $color-border;
+    color: $color-input;
+  }
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+
+  &.forgot-password {
+    row-gap: 15px;
+  }
+
+  // input
+  input {
+    border: 1.2px solid $color-border;
+    border-radius: 6px;
+    height: 48px;
+    padding: 0 12px;
+    width: 100%;
+
+    &[type='password'] {
+      padding: 0 50px 0 12px;
+    }
+
+    &::placeholder {
+      @include textStyle(15px, 400, 20px);
+      color: $color-placeholder;
+    }
+  }
+
+  .forgot-password {
+    text-align: right;
+    margin-top: -10px;
+    .forgot-password__link {
+      @include textStyle(14px, 500, 20px);
+    }
+  }
+
+  .signup__text {
+    @include textStyle(14px, 400, 20px);
+    letter-spacing: 0.2;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.success-restore-password {
+  @include textStyle(14px, 400, 20px);
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  align-items: center;
+}
+
+.refresh-token {
+  @include textStyle(14px, 400, 20px);
+}
+
+.pagenotfound {
+  height: 100%;
+  width: 100%;
+  background: url(../image/404.jpg) center center / contain no-repeat;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  a {
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    transform: translateX(-50%);
+  }
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+  @include textStyle(14px, 400, 20px);
+  @include w480 {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+}
