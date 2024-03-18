@@ -7,7 +7,7 @@ export const GithubButton = () => {
   useEffect(() => {
     const url = window.location.href
     const newUrl = url.split('?code=')
-    // window.history.pushState({}, null, newUrl[0])
+    window.history.pushState({}, null, newUrl[0])
 
     if (newUrl.length === 2) {
       const data = new FormData()
