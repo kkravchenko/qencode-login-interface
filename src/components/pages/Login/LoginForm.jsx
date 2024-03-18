@@ -6,14 +6,18 @@ import { Formik, Form } from 'formik'
 import { Input, ActionButton } from '../../shared'
 import useTokenStore from '../../../store/tokenStore'
 import useFetchData from '../../../hooks/fetchData'
+import useUserStore from '../../../store/userStore'
 
 const LoginForm = () => {
+  const [email, setEmail] = useState('')
   const [showPasswordField, setShowPasswordField] = useState('false')
   const navigate = useNavigate()
 
   const fetchData = useFetchData()
 
   const setToken = useTokenStore((state) => state.setToken)
+
+  useUserStore.subscribe((state) => setEmail(state.email))
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
@@ -55,8 +59,9 @@ const LoginForm = () => {
 
   return (
     <Formik
+      enableReinitialize={true}
       initialValues={{
-        email: '',
+        email: email ? email : '',
         password: '',
       }}
       validationSchema={SignUpSchema}

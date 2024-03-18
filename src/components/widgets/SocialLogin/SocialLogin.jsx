@@ -1,13 +1,8 @@
-import { Button, GooleButton } from '../../shared'
+import { GooleButton, GithubButton } from '../../shared'
 
-export const SocialLogin = () => {
-  const handleOnClick = (type) => {}
-
-  return (
-    <div className='social-login'>
-      <GooleButton />
-      {/* <Button type='google' handleOnClick={handleOnClick} /> */}
-      <Button type='github' handleOnClick={handleOnClick} />
-    </div>
-  )
-}
+export const SocialLogin = () => (
+  <div className='social-login'>
+    <GooleButton />
+    <GithubButton />
+  </div>
+)

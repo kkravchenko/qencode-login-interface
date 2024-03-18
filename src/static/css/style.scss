@@ -183,8 +183,9 @@ header {
   height: 48px;
   gap: 10px;
   text-transform: capitalize;
+  color: $color-input;
   @include w480 {
-    width: 142px;
+    width: 47%;
   }
 
   .button__icon {
